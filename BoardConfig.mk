@@ -33,3 +33,29 @@ TARGET_OTA_ASSERT_DEVICE := r3q
 
 # Kernel
 TARGET_KERNEL_CONFIG := r3q_eur_open_defconfig
+BOARD_KERNEL_IMAGE_NAME := Image-dtb
+
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_PAGESIZE    := 4096
+BOARD_MKBOOTIMG_ARGS += --header_version 1
+
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+TARGET_NO_KERNEL := false
+BOARD_USES_RECOVERY_AS_BOOT := false
+
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/Image-dtb
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
+
+BOARD_KERNEL_CMDLINE += console=null androidboot.hardware=qcom androidboot.console=ttyMSM0
+BOARD_KERNEL_CMDLINE += androidboot.memcg=1
+BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000
+BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
+BOARD_KERNEL_CMDLINE += service_locator.enable=1
+BOARD_KERNEL_CMDLINE += swiotlb=2048
+BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a600000.dwc3
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_CMDLINE += loop.max_part=7
+
+# Partitions
+BOARD_DTBOIMG_PARTITION_SIZE := 20480
